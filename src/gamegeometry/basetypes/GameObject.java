@@ -24,6 +24,7 @@ public interface GameObject {
      */
     void drawOn(DrawSurface d);
 
+
     /**
      * A method to remove the object from the game.
      *

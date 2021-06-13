@@ -1,30 +1,52 @@
 package game.levels;
 
 import game.eventlisteners.*;
+import game.gameessentials.Background;
 import game.gameessentials.GameEnvironment;
-import game.gameessentials.SpriteCollection;
+import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
 import gamegeometry.blockdecorators.*;
 import gamegeometry.basicgeometry.Rectangle;
+import objectbehavior.Counter;
+import objectbehavior.Velocity;
+
 import java.awt.*;
-
-public class LevelTower extends BaseLevel{
-
-    private SpriteCollection spriteCollection;
+import java.util.List;
 
 
-    public LevelTower(GameEnvironment environment,
-                      ScoreTrackingListener scoreTracker) {
-        super(environment, 6, 200, "Tower", 2, 6, scoreTracker);
-        initializeBlocks(scoreTracker);
+public class LevelMoon extends BaseLevel{
+
+    private final Counter lifeCounter;
+    private final ScoreTrackingListener scoreTracker;
+    private final Background background;
+
+
+    public LevelMoon(GameEnvironment environment,
+                     ScoreTrackingListener scoreTracker,
+                     Counter lifeCounter) {
+        super(environment, 2, 200, "Tower", 2, 6);
+        this.lifeCounter = lifeCounter;
+        this.scoreTracker = scoreTracker;
+        initializeBlocks(scoreTracker, lifeCounter);
+        this.background = new Background();
+        initializeBackground();
+        List<Velocity> velocities = initialBallVelocities();
+        velocities.add(Velocity.fromAngleAndSpeed(135, Ball.DEFAULT_SPEED));
+        velocities.add(Velocity.fromAngleAndSpeed(225, Ball.DEFAULT_SPEED));
     }
 
-    private void initializeBlocks(ScoreTrackingListener scoreTracker){
+    private void initializeBackground(){
+        Block backgroundBlock = new Block(0, 0, GameLevel.WIDTH,
+                GameLevel.HEIGHT, Color.green);
+        this.background.addToBackground(backgroundBlock);
+    }
 
+    private void initializeBlocks(ScoreTrackingListener scoreTracker,
+                                  Counter lifeCounter){
         BlockRemover blockRemover = new BlockRemover(this, getRemainingBlocks());
-        BallRemover ballRemover = new BallRemover(this, getRemainingBalls());
+        BallRemover ballRemover = new BallRemover(this, lifeCounter);
         BallAdder ballAdder = new BallAdder(this, getRemainingBalls());
-        LifeAdder lifeAdder = new LifeAdder(getCurrentBalls(), getRemainingBalls());
+        LifeAdder lifeAdder = new LifeAdder(lifeCounter);
         Rectangle window = getEnvironment().getWindow().getCollisionRectangle();
         int blockHeight = 24;
         int blockWidth = 48;
@@ -127,5 +149,20 @@ public class LevelTower extends BaseLevel{
                 increaseNumberOfBlocksToRemove(1);
             }
         }
+    }
+
+    @Override
+    public Counter getLifeCounter() {
+        return this.lifeCounter;
+    }
+
+    @Override
+    public ScoreTrackingListener getScoreTracker() {
+        return this.scoreTracker;
+    }
+
+    @Override
+    public Background getBackground() {
+        return background;
     }
 }

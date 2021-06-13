@@ -19,13 +19,13 @@ public class AnimationRunner {
         return gui;
     }
 
-    public void run(Animation animation, Color backgroundColor) {
+    public void run(Animation animation) {
         int millisecondsPerFrame = (int) (1000 / animation.getFps());
         while (!animation.shouldStop()) {
             long startTime = System.currentTimeMillis(); // timing
             DrawSurface d = gui.getDrawSurface();
 
-            animation.doOneFrame(d, backgroundColor);
+            animation.doOneFrame(d);
 
             gui.show(d);
             long usedTime = System.currentTimeMillis() - startTime;

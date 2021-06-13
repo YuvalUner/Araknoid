@@ -49,8 +49,8 @@ public class Ball implements Sprite {
     private GameEnvironment environment;
     private Line trajectory;
     private CollisionInfo closestCollision;
-    public static final int DEFAULT_SPEED = 6;
-    public static final int DEFAULT_RADIUS = 12;
+    public static final int DEFAULT_SPEED = 8;
+    public static final int DEFAULT_RADIUS = 10;
 
     /**
      * Constructor.

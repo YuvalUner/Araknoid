@@ -1,10 +1,12 @@
 package game.levels;
 
+import game.eventlisteners.ScoreTrackingListener;
 import game.gameessentials.GameEnvironment;
 import game.gameessentials.SpriteCollection;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.Collidable;
 import gamegeometry.basetypes.Sprite;
+import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
 import java.util.List;
@@ -41,4 +43,12 @@ public interface LevelInformation {
     void addCollidable(Collidable c);
 
     void removeCollidable(Collidable c);
+
+    Counter getLifeCounter();
+
+    ScoreTrackingListener getScoreTracker();
+
+    Counter getRemainingBalls();
+
+    Counter getRemainingBlocks();
 }

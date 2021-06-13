@@ -1,22 +1,19 @@
 package game.levels;
 
-import game.eventlisteners.ScoreTrackingListener;
 import game.gameessentials.*;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.Collidable;
 import gamegeometry.basetypes.Sprite;
-import gamegeometry.blockdecorators.BlockWithText;
 import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseLevel implements  LevelInformation {
 
-    private GameEnvironment environment;
-    private SpriteCollection spriteCollection;
+    private final GameEnvironment environment;
+    private final SpriteCollection spriteCollection;
     private final int numberOfBalls;
     private final int paddleWidth;
     private final String levelName;
@@ -26,15 +23,11 @@ public abstract class BaseLevel implements  LevelInformation {
     private ArrayList<Block> blocks;
     private final Counter remainingBlocks;
     private final Counter remainingBalls;
-    private final Counter currentBalls;
-    private ArrayList<Velocity> initialBallVelocities;
-    private Background background;
-
+    private final ArrayList<Velocity> initialBallVelocities;
 
     public BaseLevel(GameEnvironment environment, int numberOfBalls,
                      int paddleWidth, String levelName,
-                     int amountOfBallsToSpawn, int paddleSpeed,
-                     ScoreTrackingListener scoreTracker){
+                     int amountOfBallsToSpawn, int paddleSpeed){
         this.environment = environment;
         this.spriteCollection = new SpriteCollection();
         this.numberOfBalls = numberOfBalls;
@@ -42,32 +35,9 @@ public abstract class BaseLevel implements  LevelInformation {
         this.levelName = levelName;
         this.amountOfBallsToSpawn = amountOfBallsToSpawn;
         this.paddleSpeed = paddleSpeed;
+        this.initialBallVelocities = new ArrayList<>();
         this.remainingBalls = new Counter();
         this.remainingBlocks = new Counter();
-        this.currentBalls = new Counter();
-        initializeIndicators(scoreTracker.getScoreCounter());
-    }
-
-    private void initializeIndicators(Counter scoreCounter){
-        ScoreIndicator scoreIndicator = new ScoreIndicator(new Block(0, 0,
-                GameLevel.WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT,
-                Color.white), "", Color.black,
-                scoreCounter, 14, 0, GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
-        scoreIndicator.addToGame(this);
-        BlockWithText levelIndicator =
-                new BlockWithText(new Block(GameLevel.WIDTH / 3, 0,
-                        GameLevel.WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT
-                        , Color.white), "Current Level: " + this.levelName,
-                Color.black, 14, GameLevel.WIDTH + 30,
-                        GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
-        levelIndicator.addToGame(this);
-        LifeIndicator lifeIndicator =
-                new LifeIndicator(new Block(2 * GameLevel.WIDTH / 3, 0,
-                GameLevel.WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT,
-                Color.white), "", Color.black, remainingBalls, 14 ,
-                        GameLevel.WIDTH - 130,
-                        GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
-        lifeIndicator.addToGame(this);
     }
 
     public Counter getRemainingBlocks() {
@@ -76,10 +46,6 @@ public abstract class BaseLevel implements  LevelInformation {
 
     public Counter getRemainingBalls() {
         return this.remainingBalls;
-    }
-
-    public Counter getCurrentBalls() {
-        return this.currentBalls;
     }
 
     @Override
@@ -144,11 +110,6 @@ public abstract class BaseLevel implements  LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         return this.initialBallVelocities;
-    }
-
-    @Override
-    public Background getBackground() {
-        return background;
     }
 
     @Override

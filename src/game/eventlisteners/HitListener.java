@@ -3,6 +3,7 @@
 package game.eventlisteners;
 
 import gamegeometry.basetypes.Ball;
+import gamegeometry.basetypes.Block;
 import gamegeometry.blockdecorators.BlockDecorator;
 
 /**
@@ -18,5 +19,5 @@ public interface HitListener {
      * when the beingHit object is hit.</p>
      *  @param beingHit the block that was hit
      * @param hitter   the ball that hit the block*/
-    void hitEvent(BlockDecorator beingHit, Ball hitter);
+    void hitEvent(Block beingHit, Ball hitter);
 }

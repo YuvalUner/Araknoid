@@ -14,6 +14,8 @@ import objectbehavior.Velocity;
 import gamegeometry.basicgeometry.Point;
 import gamegeometry.basicgeometry.Rectangle;
 
+import java.util.List;
+
 /**
  * @author Yuval Uner
  * <h1> The basic abstract block decorator, defining the base behaviors of all
@@ -42,6 +44,7 @@ public abstract class BasicBlockDecorator implements Collidable, Sprite,
      */
     public BasicBlockDecorator(BlockDecorator block) {
         this.block = block;
+        block.getBlock().setDecorator(this);
     }
 
     /**
@@ -103,6 +106,16 @@ public abstract class BasicBlockDecorator implements Collidable, Sprite,
     @Override
     public void timePassed() {
 
+    }
+
+    @Override
+    public int getScoreValue() {
+        return block.getScoreValue();
+    }
+
+    @Override
+    public List<HitListener> getHitListeners() {
+        return block.getHitListeners();
     }
 
     @Override

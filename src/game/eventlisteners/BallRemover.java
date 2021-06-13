@@ -4,6 +4,7 @@ package game.eventlisteners;
 
 import game.levels.GameLevel;
 import game.levels.LevelInformation;
+import gamegeometry.basetypes.Block;
 import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
 import gamegeometry.basetypes.Ball;
@@ -30,7 +31,7 @@ public class BallRemover implements HitListener {
     }
 
     @Override
-    public void hitEvent(BlockDecorator beingHit, Ball hitter) {
+    public void hitEvent(Block beingHit, Ball hitter) {
         // Removes the ball from the game and decrements the ball counter
         if (level.getSprites().getSpriteList().contains(hitter)) {
             removedBalls.decrease(1);

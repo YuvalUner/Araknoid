@@ -28,7 +28,6 @@ public class GameEnvironment {
     private ArrayList<Collidable> collidables;
     private final Block window;
     private final double borders;
-    private final Color backgroundColor;
 
     /**
      * Constructor.
@@ -39,14 +38,14 @@ public class GameEnvironment {
      *                    will act as the screen's borders).
      * @param borderColor the color of the borders
      */
-    public GameEnvironment(Block window, double borders, Color borderColor, Color backgroundColor) {
+    public GameEnvironment(Block window, double borders, Color borderColor) {
         collidables = new ArrayList<>();
         this.window = window;
-        this.borders = borders;
-        this.backgroundColor = backgroundColor;
-        if (borders > 0) {
-            setBorders(borderColor);
+        if (borders < 0) {
+            borders = 0;
         }
+        this.borders = borders;
+        setBorders(borderColor);
     }
 
     /**
@@ -54,10 +53,6 @@ public class GameEnvironment {
      */
     public double getBorders() {
         return borders;
-    }
-
-    public Color getBackgroundColor() {
-        return backgroundColor;
     }
 
     /**

@@ -5,6 +5,7 @@ import biuoop.KeyboardSensor;
 import game.levels.GameLevel;
 import game.gameessentials.GameEnvironment;
 import game.gameessentials.SpriteCollection;
+import gamegeometry.basetypes.Sprite;
 
 import java.awt.Color;
 
@@ -16,20 +17,22 @@ public class WaitingScreenAnimation implements Animation{
     private final int fontSize;
     private boolean stop;
     private final KeyboardSensor keyboard;
+    private final Sprite background;
 
     public WaitingScreenAnimation(double fps, SpriteCollection gameScreen,
                                   GameEnvironment gameEnvironment, int fontSize,
-                                  KeyboardSensor keyboard){
+                                  KeyboardSensor keyboard, Sprite background){
         this.fps = fps;
         this.gameScreen = gameScreen;
         this.environment = gameEnvironment;
         this.fontSize = fontSize;
         this.keyboard = keyboard;
+        this.background = background;
     }
 
 
     @Override
-    public void doOneFrame(DrawSurface d, Color backgroundColor) {
+    public void doOneFrame(DrawSurface d) {
         this.stop = false;
         if (this.keyboard.isPressed(KeyboardSensor.LEFT_KEY)
                 || this.keyboard.isPressed(KeyboardSensor.RIGHT_KEY)
@@ -37,8 +40,7 @@ public class WaitingScreenAnimation implements Animation{
                 || this.keyboard.isPressed("d")){
             this.stop = true;
         }
-        d.setColor(backgroundColor);
-        d.fillRectangle(0, 0, GameLevel.WIDTH, GameLevel.HEIGHT);
+        this.background.drawOn(d);
         this.gameScreen.drawAllOn(d);
         this.environment.drawAllOn(d);
         d.setColor(Color.BLACK);

@@ -3,6 +3,7 @@
 package game.eventlisteners;
 
 import gamegeometry.basetypes.Ball;
+import gamegeometry.basetypes.Block;
 import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
 
@@ -30,7 +31,7 @@ public class ScoreTrackingListener implements HitListener {
     }
 
     @Override
-    public void hitEvent(BlockDecorator beingHit, Ball hitter) {
+    public void hitEvent(Block beingHit, Ball hitter) {
         // Updates the score counter by the block's point value. Defaults to 5 if not changed.
         scoreCounter.increase(beingHit.getScoreValue());
     }

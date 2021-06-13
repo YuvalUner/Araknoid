@@ -3,9 +3,9 @@
 package game.eventlisteners;
 
 import game.levels.LevelInformation;
+import gamegeometry.basetypes.Block;
 import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
-import game.levels.GameLevel;
 import gamegeometry.basetypes.Ball;
 import objectbehavior.Velocity;
 
@@ -18,7 +18,7 @@ import java.awt.Color;
 public class BallAdder implements HitListener {
 
     private final LevelInformation game;
-    private final Counter remainingBalls;
+    private final Counter currentBalls;
 
     /**
      * Constructor.
@@ -26,13 +26,13 @@ public class BallAdder implements HitListener {
      * @param level           the level the listener corresponds to.
      * @param remainingBalls the level's remainingBalls counter.
      */
-    public BallAdder(LevelInformation level, Counter remainingBalls) {
+    public BallAdder(LevelInformation level, Counter currentBalls) {
         this.game = level;
-        this.remainingBalls = remainingBalls;
+        this.currentBalls = currentBalls;
     }
 
     @Override
-    public void hitEvent(BlockDecorator beingHit, Ball hitter) {
+    public void hitEvent(Block beingHit, Ball hitter) {
         // Heading a ball heading downward from the location the block was at.
         Ball newBall = new Ball((int) (beingHit.getCollisionRectangle().getUpperLeft().getX()
                 + beingHit.getCollisionRectangle().getWidth() / 2),
@@ -40,7 +40,7 @@ public class BallAdder implements HitListener {
                         + beingHit.getCollisionRectangle().getHeight() / 2), Ball.DEFAULT_RADIUS, Color.BLACK);
         newBall.setEnvironment(game.getEnvironment());
         newBall.setVelocity(Velocity.fromAngleAndSpeed(180, Ball.DEFAULT_SPEED));
-        remainingBalls.increase(1);
+        currentBalls.increase(1);
         newBall.addToGame(game);
     }
 }

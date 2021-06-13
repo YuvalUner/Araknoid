@@ -33,8 +33,8 @@ public class Paddle implements Sprite, Collidable {
     private Rectangle shape;
     private final Color color;
     private final ArrayList<Rectangle> regions;
-    private final GameLevel level;
-    static final int PADDLE_SPEED = 5;
+    private final LevelInformation level;
+    static final int PADDLE_SPEED = 8;
 
     /**
      * Constructor.
@@ -44,7 +44,8 @@ public class Paddle implements Sprite, Collidable {
      * @param color    the paddle's color
      * @param level     the game the paddle is a part of
      */
-    public Paddle(KeyboardSensor keyboard, Rectangle shape, Color color, GameLevel level) {
+    public Paddle(KeyboardSensor keyboard, Rectangle shape, Color color,
+                  LevelInformation level) {
         this.keyboard = keyboard;
         this.shape = shape;
         this.color = color;

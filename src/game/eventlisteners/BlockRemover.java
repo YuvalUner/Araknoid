@@ -4,6 +4,7 @@ package game.eventlisteners;
 
 import game.levels.GameLevel;
 import game.levels.LevelInformation;
+import gamegeometry.basetypes.Block;
 import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
 import gamegeometry.basetypes.Ball;
@@ -34,8 +35,8 @@ public class BlockRemover implements HitListener {
 
 
     @Override
-    public void hitEvent(BlockDecorator beingHit, Ball hitter) {
-        beingHit.removeFromGame(level);
+    public void hitEvent(Block beingHit, Ball hitter) {
+        beingHit.getDecorator().removeFromGame(level);
         /*
          * Some special blocks may not need to be hit to win the game, and they
          * are not counted by the block counter when added.

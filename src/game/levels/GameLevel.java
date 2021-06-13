@@ -5,14 +5,14 @@ package game.levels;
 import animation.*;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import game.gameessentials.GameEnvironment;
-import game.gameessentials.SpriteCollection;
-import gamegeometry.basetypes.Ball;
-import gamegeometry.basetypes.Collidable;
-import gamegeometry.basetypes.Sprite;
-import gamegeometry.basetypes.Paddle;
-import objectbehavior.Counter;
-import objectbehavior.Velocity;
+import game.eventlisteners.BallRemover;
+import game.gameessentials.LifeIndicator;
+import game.gameessentials.ScoreIndicator;
+import gamegeometry.basetypes.*;
+import gamegeometry.basicgeometry.Point;
+import gamegeometry.basicgeometry.Rectangle;
+import gamegeometry.blockdecorators.BlockWithText;
+import gamegeometry.blockdecorators.KillBlock;
 
 import java.awt.Color;
 
@@ -29,11 +29,6 @@ import java.awt.Color;
  * 5. Run - runs the game</p>
  */
 public class GameLevel implements Animation {
-    private final SpriteCollection sprites;
-    private final GameEnvironment environment;
-    private final Counter remainingBlocks;
-    private final Counter remainingBalls;
-    private final Counter currentBalls;
     private final AnimationRunner runner;
     private boolean running;
     private final KeyboardSensor keyboard;
@@ -42,28 +37,16 @@ public class GameLevel implements Animation {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 600;
     public static final int SCORE_INDICATOR_HEIGHT = 30;
-    private final BaseLevel level;
+    private final LevelInformation level;
 
     /**
      * Constructor.
      */
-    public GameLevel(BaseLevel level, AnimationRunner runner) {
+    public GameLevel(LevelInformation level, AnimationRunner runner) {
         this.level = level;
-        this.sprites = level.getSprites();
-        this.environment = level.getEnvironment();
         this.runner = runner;
         this.keyboard = runner.getGui().getKeyboardSensor();
-        this.remainingBlocks = level.getRemainingBlocks();
-        this.remainingBalls = level.getRemainingBalls();
-        this.currentBalls = level.getCurrentBalls();
         this.fps = 60;
-    }
-
-    /**
-     * @return the game's environment.
-     */
-    public GameEnvironment getEnvironment() {
-        return environment;
     }
 
     /**
@@ -74,7 +57,46 @@ public class GameLevel implements Animation {
      * </p>
      */
     public void initialize() {
+        KillBlock downKillBlock = new KillBlock(new Block(0, GameLevel.HEIGHT
+                , GameLevel.WIDTH, 1 , Color.black), new BallRemover(level,
+                level.getRemainingBalls()));
+        downKillBlock.addToGame(level);
+        ScoreIndicator scoreIndicator = new ScoreIndicator(new Block(0, 0,
+                GameLevel.WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT,
+                Color.white), "", Color.black,
+                level.getScoreTracker().getScoreCounter(), 14, 0,
+                GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
+        scoreIndicator.addToGame(level);
+        BlockWithText levelIndicator =
+                new BlockWithText(new Block(GameLevel.WIDTH / 3, 0,
+                        GameLevel.WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT
+                        , Color.white), "Current Level: " + level.levelName(),
+                        Color.black, 14, GameLevel.WIDTH + 30,
+                        GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
+        levelIndicator.addToGame(level);
+        LifeIndicator lifeIndicator =
+                new LifeIndicator(new Block(2 * GameLevel.WIDTH / 3, 0,
+                        GameLevel.WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT,
+                        Color.white), "", Color.black, level.getLifeCounter(), 14 ,
+                        GameLevel.WIDTH - 130,
+                        GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
+        lifeIndicator.addToGame(level);
+        Rectangle rectangle =
+                new Rectangle(new Point(WIDTH / 2 - level.paddleWidth() / 2,
+                        550), level.paddleWidth(), 15);
+        this.paddle = new Paddle(keyboard, rectangle, Color.ORANGE, level);
+        this.paddle.addToGame(level);
+        initializeBalls();
+    }
 
+    private void initializeBalls(){
+        for (int i = 0; i < level.numberOfBalls(); i ++) {
+            Ball ball = new Ball(WIDTH / 2, 500, Ball.DEFAULT_RADIUS, Color.white);
+            ball.setEnvironment(level.getEnvironment());
+            ball.setVelocity(level.initialBallVelocities().get(i));
+            ball.addToGame(level);
+            level.getRemainingBalls().increase(1);
+        }
     }
 
     /**
@@ -83,52 +105,33 @@ public class GameLevel implements Animation {
     public void run() {
         this.initialize();
         this.running = true;
-        this.runner.run(new CountdownAnimation(2, 3, this.sprites,
-                30, this.environment), this.environment.getBackgroundColor());
-        this.runner.run(this, this.environment.getBackgroundColor());
-    }
-
-    /**
-     * Removes a sprite from the game.
-     *
-     * @param s the sprite to remove.
-     */
-    public void removeSprite(Sprite s) {
-        sprites.remove(s);
-    }
-
-    /**
-     * Removes a collidable from the game.
-     *
-     * @param c the collidable to remove.
-     */
-    public void removeCollidable(Collidable c) {
-        environment.remove(c);
+        this.runner.run(new CountdownAnimation(2, 3, level.getSprites(),
+                30, level.getEnvironment(), level.getBackground()));
+        this.runner.run(this);
     }
 
     @Override
-    public void doOneFrame(DrawSurface d, Color backgroundColor) {
+    public void doOneFrame(DrawSurface d) {
         if (this.keyboard.isPressed("p")){
-            this.runner.run(new PauseScreen(this.keyboard), backgroundColor);
+            this.runner.run(new PauseScreen(this.keyboard));
         }
-        d.setColor(backgroundColor);
-        d.fillRectangle(0, 0, WIDTH, HEIGHT);
-        this.environment.drawAllOn(d);
-        this.sprites.drawAllOn(d);
+        level.getBackground().drawOn(d);
+        level.getEnvironment().drawAllOn(d);
+        level.getSprites().drawAllOn(d);
         // Make all sprites perform the actions they should perform
-        this.sprites.notifyAllTimePassed();
-        if (remainingBalls.getCurrentCount() == 0 || remainingBlocks.getCurrentCount() == 0) {
+        level.getSprites().notifyAllTimePassed();
+        if (level.getLifeCounter().getCurrentCount() == 0
+                || level.getRemainingBlocks().getCurrentCount() == 0) {
             this.running = false;
         }
-        else if (remainingBalls.getCurrentCount() == currentBalls.getCurrentCount() - 1){
-            Ball ball = new Ball(WIDTH / 2 + 60, 450, Ball.DEFAULT_RADIUS, Color.black);
-            ball.setEnvironment(this.environment);
-            ball.setVelocity(Velocity.fromAngleAndSpeed(180, Ball.DEFAULT_SPEED));
-            ball.addToGame(this.level);
-            currentBalls.decrease(1);
-            paddle.setPosition(WIDTH/ 2);
-            this.runner.run(new WaitingScreenAnimation(60, this.sprites, this.environment,
-                    30, this.keyboard), backgroundColor);
+        else if (level.getRemainingBalls().getCurrentCount() == 0){
+            initializeBalls();
+            level.getLifeCounter().decrease(1);
+            paddle.setPosition(WIDTH / 2 - level.paddleWidth() / 2);
+            if (level.getLifeCounter().getCurrentCount() > 0) {
+                this.runner.run(new WaitingScreenAnimation(60, level.getSprites(),
+                        level.getEnvironment(), 30, this.keyboard, level.getBackground()));
+            }
         }
     }
 

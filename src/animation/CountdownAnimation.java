@@ -1,9 +1,11 @@
 package animation;
 
 import biuoop.DrawSurface;
+import game.gameessentials.Background;
 import game.levels.GameLevel;
 import game.gameessentials.GameEnvironment;
 import game.gameessentials.SpriteCollection;
+import gamegeometry.basetypes.Sprite;
 
 import java.awt.*;
 
@@ -16,23 +18,24 @@ public class CountdownAnimation implements Animation{
     private final int fontSize;
     private boolean shouldStop;
     private final GameEnvironment environment;
+    private final Sprite background;
 
     public CountdownAnimation(double numOfSeconds, int countFrom, SpriteCollection gameScreen,
-                              int fontSize, GameEnvironment environment){
+                              int fontSize, GameEnvironment environment, Sprite background){
         this.numOfSeconds = numOfSeconds;
         this.countFrom = countFrom;
         this.gameScreen = gameScreen;
         this.fontSize = fontSize;
         this.environment = environment;
+        this.background = background;
     }
 
 
 
     @Override
-    public void doOneFrame(DrawSurface d, Color backgroundColor) {
+    public void doOneFrame(DrawSurface d) {
         this.shouldStop = false;
-        d.setColor(backgroundColor);
-        d.fillRectangle(0, 0, GameLevel.WIDTH, GameLevel.HEIGHT);
+        this.background.drawOn(d);
         this.gameScreen.drawAllOn(d);
         this.environment.drawAllOn(d);
         d.setColor(Color.BLACK);

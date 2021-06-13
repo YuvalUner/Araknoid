@@ -33,6 +33,7 @@ public class Block implements Collidable, Sprite, HitNotifier, BlockDecorator {
     private final Color color;
     private final ArrayList<HitListener> hitListeners;
     private int scoreValue;
+    private BlockDecorator decorator;
     public static final int DEFAULT_SCORE = 5;
 
     /**
@@ -58,6 +59,14 @@ public class Block implements Collidable, Sprite, HitNotifier, BlockDecorator {
      */
     public Block(double x, double y, double width, double height, Color color) {
         this(new Rectangle(x, y, width, height), color);
+    }
+
+    public void setDecorator(BlockDecorator newDecorator) {
+        this.decorator = newDecorator;
+    }
+
+    public BlockDecorator getDecorator() {
+        return decorator;
     }
 
     /**
