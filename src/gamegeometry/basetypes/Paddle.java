@@ -176,12 +176,12 @@ public class Paddle implements Sprite, Collidable {
     }
 
     @Override
-    public void addToGame(LevelInformation level) {
+    public void addToLevel(LevelInformation level) {
         level.addCollidable(this);
         level.addSprite(this);
     }
 
     @Override
-    public void removeFromGame(LevelInformation level) {
+    public void removeFromLevel(LevelInformation level) {
     }
 }

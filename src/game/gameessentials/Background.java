@@ -20,7 +20,7 @@ public class Background implements Sprite {
     }
 
     @Override
-    public void addToGame(LevelInformation level) {
+    public void addToLevel(LevelInformation level) {
         level.addSprite(this);
     }
 
@@ -32,7 +32,7 @@ public class Background implements Sprite {
     }
 
     @Override
-    public void removeFromGame(LevelInformation level) {
+    public void removeFromLevel(LevelInformation level) {
         level.removeSprite(this);
     }
 

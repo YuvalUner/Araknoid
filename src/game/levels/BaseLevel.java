@@ -17,7 +17,6 @@ public abstract class BaseLevel implements  LevelInformation {
     private final int numberOfBalls;
     private final int paddleWidth;
     private final String levelName;
-    private final int amountOfBallsToSpawn;
     private int numberOfBlocksToRemove = 0;
     private final int paddleSpeed;
     private ArrayList<Block> blocks;
@@ -26,14 +25,12 @@ public abstract class BaseLevel implements  LevelInformation {
     private final ArrayList<Velocity> initialBallVelocities;
 
     public BaseLevel(GameEnvironment environment, int numberOfBalls,
-                     int paddleWidth, String levelName,
-                     int amountOfBallsToSpawn, int paddleSpeed){
+                     int paddleWidth, String levelName, int paddleSpeed){
         this.environment = environment;
         this.spriteCollection = new SpriteCollection();
         this.numberOfBalls = numberOfBalls;
         this.paddleWidth = paddleWidth;
         this.levelName = levelName;
-        this.amountOfBallsToSpawn = amountOfBallsToSpawn;
         this.paddleSpeed = paddleSpeed;
         this.initialBallVelocities = new ArrayList<>();
         this.remainingBalls = new Counter();
@@ -115,10 +112,5 @@ public abstract class BaseLevel implements  LevelInformation {
     @Override
     public String levelName() {
         return this.levelName;
-    }
-
-    @Override
-    public int getAmountOfBallsToSpawn() {
-        return amountOfBallsToSpawn;
     }
 }

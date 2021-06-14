@@ -82,7 +82,7 @@ public abstract class BasicBlockDecorator implements Collidable, Sprite,
      * @param level the level to add the block to
      */
     @Override
-    public void addToGame(LevelInformation level) {
+    public void addToLevel(LevelInformation level) {
         level.addCollidable(this);
         level.addSprite(this);
     }
@@ -119,7 +119,7 @@ public abstract class BasicBlockDecorator implements Collidable, Sprite,
     }
 
     @Override
-    public void removeFromGame(LevelInformation level) {
+    public void removeFromLevel(LevelInformation level) {
         // Removes the decorator from the game
         level.removeCollidable(this);
         level.removeSprite(this);

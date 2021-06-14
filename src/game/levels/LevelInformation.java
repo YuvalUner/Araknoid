@@ -30,8 +30,6 @@ public interface LevelInformation {
     // This number should be <= blocks.size();
     int numberOfBlocksToRemove();
 
-    int getAmountOfBallsToSpawn();
-
     GameEnvironment getEnvironment();
 
     void addSprite(Sprite s);
@@ -43,10 +41,6 @@ public interface LevelInformation {
     void addCollidable(Collidable c);
 
     void removeCollidable(Collidable c);
-
-    Counter getLifeCounter();
-
-    ScoreTrackingListener getScoreTracker();
 
     Counter getRemainingBalls();
 

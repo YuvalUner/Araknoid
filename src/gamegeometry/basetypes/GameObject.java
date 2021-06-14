@@ -15,7 +15,7 @@ public interface GameObject {
      *
      * @param level the level to add the current collidable to
      */
-    void addToGame(LevelInformation level);
+    void addToLevel(LevelInformation level);
 
     /**
      * A method to draw the collidable on the screen.
@@ -30,5 +30,5 @@ public interface GameObject {
      *
      * @param level the level to remove the object from.
      */
-    void removeFromGame(LevelInformation level);
+    void removeFromLevel(LevelInformation level);
 }

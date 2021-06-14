@@ -16,17 +16,12 @@ import java.util.List;
 
 public class LevelMoon extends BaseLevel{
 
-    private final Counter lifeCounter;
-    private final ScoreTrackingListener scoreTracker;
     private final Background background;
-
 
     public LevelMoon(GameEnvironment environment,
                      ScoreTrackingListener scoreTracker,
                      Counter lifeCounter) {
-        super(environment, 2, 200, "Tower", 2, 6);
-        this.lifeCounter = lifeCounter;
-        this.scoreTracker = scoreTracker;
+        super(environment, 2, 120, "Moon", 8);
         initializeBlocks(scoreTracker, lifeCounter);
         this.background = new Background();
         initializeBackground();
@@ -44,7 +39,7 @@ public class LevelMoon extends BaseLevel{
     private void initializeBlocks(ScoreTrackingListener scoreTracker,
                                   Counter lifeCounter){
         BlockRemover blockRemover = new BlockRemover(this, getRemainingBlocks());
-        BallRemover ballRemover = new BallRemover(this, lifeCounter);
+        BallRemover ballRemover = new BallRemover(this, getRemainingBalls());
         BallAdder ballAdder = new BallAdder(this, getRemainingBalls());
         LifeAdder lifeAdder = new LifeAdder(lifeCounter);
         Rectangle window = getEnvironment().getWindow().getCollisionRectangle();
@@ -70,7 +65,7 @@ public class LevelMoon extends BaseLevel{
                     scoreTracker, Block.DEFAULT_SCORE), blockRemover,
                     true, getRemainingBlocks());
             increaseNumberOfBlocksToRemove(1);
-            blockTopRow.addToGame(this);
+            blockTopRow.addToLevel(this);
             // Second row of blocks
             if (i + margin < window.getWidth() - borders) {
                 if (counter != 8) {
@@ -78,13 +73,13 @@ public class LevelMoon extends BaseLevel{
                             new Block(i + margin, initialY + blockHeight, blockWidth,
                                     blockHeight, Color.orange), scoreTracker,
                             Block.DEFAULT_SCORE), blockRemover, true, getRemainingBlocks());
-                    blockSecondRow.addToGame(this);
+                    blockSecondRow.addToLevel(this);
                     // Life block is added as the 8th block of the 2nd row
                 } else {
                     LifeBlock lifeBlock = BlockBuilder.standardLifeBlock(i + margin,
                             initialY + blockHeight, blockWidth, blockHeight, blockRemover,
                             lifeAdder, getRemainingBlocks());
-                    lifeBlock.addToGame(this);
+                    lifeBlock.addToLevel(this);
                 }
                 increaseNumberOfBlocksToRemove(1);
             }
@@ -95,13 +90,13 @@ public class LevelMoon extends BaseLevel{
                             new Block(i + margin * 2, initialY + blockHeight * 2,
                                     blockWidth, blockHeight, Color.yellow), scoreTracker,
                             Block.DEFAULT_SCORE), blockRemover, true, getRemainingBlocks());
-                    blockThirdRow.addToGame(this);
+                    blockThirdRow.addToLevel(this);
                 }
                 else{
                     BallAddingBlock ballAddingBlock = BlockBuilder.standardBallAddingBlock(
                             i + margin * 2, initialY + blockHeight * 2, blockWidth,
                             blockHeight, blockRemover, ballAdder, getRemainingBlocks());
-                    ballAddingBlock.addToGame(this);
+                    ballAddingBlock.addToLevel(this);
                 }
                 increaseNumberOfBlocksToRemove(1);
             }
@@ -112,13 +107,13 @@ public class LevelMoon extends BaseLevel{
                             new Block(i + margin * 3, initialY + blockHeight * 3,
                                     blockWidth, blockHeight, Color.gray), scoreTracker,
                             Block.DEFAULT_SCORE), blockRemover, true, getRemainingBlocks());
-                    blockFourthRow.addToGame(this);
+                    blockFourthRow.addToLevel(this);
                     // Kill block is added as the 5th block of the 4th row
                 } else {
                     KillBlock killBlock = BlockBuilder.standardKillBlock(i + margin * 3,
                             initialY + blockHeight * 3, blockWidth, blockHeight,
                             blockRemover, ballRemover, getRemainingBlocks());
-                    killBlock.addToGame(this);
+                    killBlock.addToLevel(this);
                 }
                 increaseNumberOfBlocksToRemove(1);
             }
@@ -129,13 +124,13 @@ public class LevelMoon extends BaseLevel{
                             new Block(i + margin * 4, initialY + blockHeight * 4,
                                     blockWidth, blockHeight, Color.white), scoreTracker,
                             Block.DEFAULT_SCORE), blockRemover, true, getRemainingBlocks());
-                    blockFifthRow.addToGame(this);
+                    blockFifthRow.addToLevel(this);
                     // Life block is added as the 2nd block of the 5th row
                 } else {
                     LifeBlock lifeBlock = BlockBuilder.standardLifeBlock(i + margin * 4,
                             initialY + blockHeight * 4, blockWidth, blockHeight,
                             blockRemover, lifeAdder, getRemainingBlocks());
-                    lifeBlock.addToGame(this);
+                    lifeBlock.addToLevel(this);
                 }
                 increaseNumberOfBlocksToRemove(1);
             }
@@ -145,20 +140,10 @@ public class LevelMoon extends BaseLevel{
                         new Block(i + margin * 5, initialY + blockHeight * 5,
                                 blockWidth, blockHeight, Color.pink), scoreTracker,
                         Block.DEFAULT_SCORE), blockRemover, true, getRemainingBlocks());
-                blockSixthRow.addToGame(this);
+                blockSixthRow.addToLevel(this);
                 increaseNumberOfBlocksToRemove(1);
             }
         }
-    }
-
-    @Override
-    public Counter getLifeCounter() {
-        return this.lifeCounter;
-    }
-
-    @Override
-    public ScoreTrackingListener getScoreTracker() {
-        return this.scoreTracker;
     }
 
     @Override

@@ -4,7 +4,6 @@ package game.eventlisteners;
 
 import game.levels.LevelInformation;
 import gamegeometry.basetypes.Block;
-import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
 import gamegeometry.basetypes.Ball;
 import objectbehavior.Velocity;
@@ -24,7 +23,7 @@ public class BallAdder implements HitListener {
      * Constructor.
      *
      * @param level           the level the listener corresponds to.
-     * @param remainingBalls the level's remainingBalls counter.
+     * @param currentBalls the level's remainingBalls counter.
      */
     public BallAdder(LevelInformation level, Counter currentBalls) {
         this.game = level;
@@ -37,10 +36,10 @@ public class BallAdder implements HitListener {
         Ball newBall = new Ball((int) (beingHit.getCollisionRectangle().getUpperLeft().getX()
                 + beingHit.getCollisionRectangle().getWidth() / 2),
                 (int) (beingHit.getCollisionRectangle().getUpperLeft().getY()
-                        + beingHit.getCollisionRectangle().getHeight() / 2), Ball.DEFAULT_RADIUS, Color.BLACK);
+                        + beingHit.getCollisionRectangle().getHeight() / 2), Ball.DEFAULT_RADIUS, Color.WHITE);
         newBall.setEnvironment(game.getEnvironment());
         newBall.setVelocity(Velocity.fromAngleAndSpeed(180, Ball.DEFAULT_SPEED));
         currentBalls.increase(1);
-        newBall.addToGame(game);
+        newBall.addToLevel(game);
     }
 }

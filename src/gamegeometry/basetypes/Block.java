@@ -153,7 +153,7 @@ public class Block implements Collidable, Sprite, HitNotifier, BlockDecorator {
      * @param level the level to add the block to
      */
     @Override
-    public void addToGame(LevelInformation level) {
+    public void addToLevel(LevelInformation level) {
         level.addSprite(this);
         level.addCollidable(this);
     }
@@ -181,7 +181,7 @@ public class Block implements Collidable, Sprite, HitNotifier, BlockDecorator {
     }
 
     @Override
-    public void removeFromGame(LevelInformation level) {
+    public void removeFromLevel(LevelInformation level) {
         level.removeCollidable(this);
         level.removeSprite(this);
     }

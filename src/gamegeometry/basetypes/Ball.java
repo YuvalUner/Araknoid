@@ -235,12 +235,12 @@ public class Ball implements Sprite {
      * @param level the level to add the ball to
      */
     @Override
-    public void addToGame(LevelInformation level) {
+    public void addToLevel(LevelInformation level) {
         level.addSprite(this);
     }
 
     @Override
-    public void removeFromGame(LevelInformation level) {
+    public void removeFromLevel(LevelInformation level) {
         level.removeSprite(this);
     }
 }
