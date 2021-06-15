@@ -11,11 +11,11 @@ public class Background implements Sprite {
 
     private ArrayList<GameObject> backgroundMakeup;
 
-    public Background(){
+    public Background() {
         this.backgroundMakeup = new ArrayList<>();
     }
 
-    public void addToBackground(GameObject gameObject){
+    public void addToBackground(GameObject gameObject) {
         this.backgroundMakeup.add(gameObject);
     }
 
@@ -26,7 +26,7 @@ public class Background implements Sprite {
 
     @Override
     public void drawOn(DrawSurface d) {
-        for (GameObject object : backgroundMakeup){
+        for (GameObject object : backgroundMakeup) {
             object.drawOn(d);
         }
     }

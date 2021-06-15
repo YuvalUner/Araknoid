@@ -2,14 +2,13 @@ package game.eventlisteners;
 
 import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
-import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
 
-public class LifeAdder implements HitListener{
+public class LifeAdder implements HitListener {
 
     private final Counter remainingLives;
 
-    public LifeAdder(Counter remainingLives){
+    public LifeAdder(Counter remainingLives) {
         this.remainingLives = remainingLives;
     }
 

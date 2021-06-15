@@ -4,13 +4,12 @@ package gamegeometry.basetypes;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import game.levels.GameLevel;
 import game.levels.LevelInformation;
-import gamegeometry.basicgeometry.Rectangle;
 import gamegeometry.basicgeometry.Point;
+import gamegeometry.basicgeometry.Rectangle;
 import objectbehavior.Velocity;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +41,7 @@ public class Paddle implements Sprite, Collidable {
      * @param keyboard the keyBoard sensor for the paddle
      * @param shape    the shape of the paddle
      * @param color    the paddle's color
-     * @param level     the game the paddle is a part of
+     * @param level    the game the paddle is a part of
      */
     public Paddle(KeyboardSensor keyboard, Rectangle shape, Color color,
                   LevelInformation level) {
@@ -71,7 +70,7 @@ public class Paddle implements Sprite, Collidable {
         }
     }
 
-    public void setPosition(double x){
+    public void setPosition(double x) {
         this.shape = new Rectangle(x, shape.getUpperLeft().getY(), shape.getWidth(), shape.getHeight());
     }
 

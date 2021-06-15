@@ -4,7 +4,6 @@ package game.eventlisteners;
 
 import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
-import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Counter;
 
 /**

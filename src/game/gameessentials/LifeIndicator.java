@@ -5,7 +5,7 @@ import gamegeometry.blockdecorators.BlockDecorator;
 import gamegeometry.blockdecorators.BlockWithText;
 import objectbehavior.Counter;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class LifeIndicator extends BlockWithText {
 
@@ -18,8 +18,8 @@ public class LifeIndicator extends BlockWithText {
      * @param text      the text assigned to the block.
      * @param textColor the color of the text.
      * @param fontSize  the size of the font.
-     * @param x the x position of the text.
-     * @param y the y position of the text.
+     * @param x         the x position of the text.
+     * @param y         the y position of the text.
      */
     public LifeIndicator(BlockDecorator block, String text, Color textColor,
                          Counter remainingBalls, int fontSize, double x, double y) {

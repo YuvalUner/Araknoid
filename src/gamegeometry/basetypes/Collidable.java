@@ -2,8 +2,8 @@
 
 package gamegeometry.basetypes;
 
-import gamegeometry.basicgeometry.Rectangle;
 import gamegeometry.basicgeometry.Point;
+import gamegeometry.basicgeometry.Rectangle;
 import objectbehavior.Velocity;
 
 /**

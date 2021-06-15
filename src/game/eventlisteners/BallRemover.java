@@ -3,9 +3,9 @@
 package game.eventlisteners;
 
 import game.levels.LevelInformation;
+import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
 import objectbehavior.Counter;
-import gamegeometry.basetypes.Ball;
 
 /**
  * @author Yuval Uner
@@ -20,7 +20,7 @@ public class BallRemover implements HitListener {
     /**
      * Constructor.
      *
-     * @param level         the level that is being run
+     * @param level          the level that is being run
      * @param remainingBalls the counter keeping track of how many balls are left
      */
     public BallRemover(LevelInformation level, Counter remainingBalls) {

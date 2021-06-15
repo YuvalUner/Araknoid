@@ -1,16 +1,15 @@
 package animation;
 
 import biuoop.DrawSurface;
-import game.gameessentials.Background;
-import game.levels.GameLevel;
 import game.gameessentials.GameEnvironment;
 import game.gameessentials.SpriteCollection;
+import game.levels.GameLevel;
 import gamegeometry.basetypes.Sprite;
 
 import java.awt.*;
 
 
-public class CountdownAnimation implements Animation{
+public class CountdownAnimation implements Animation {
 
     private final SpriteCollection gameScreen;
     private final double numOfSeconds;
@@ -21,7 +20,7 @@ public class CountdownAnimation implements Animation{
     private final Sprite background;
 
     public CountdownAnimation(double numOfSeconds, int countFrom, SpriteCollection gameScreen,
-                              int fontSize, GameEnvironment environment, Sprite background){
+                              int fontSize, GameEnvironment environment, Sprite background) {
         this.numOfSeconds = numOfSeconds;
         this.countFrom = countFrom;
         this.gameScreen = gameScreen;
@@ -31,7 +30,6 @@ public class CountdownAnimation implements Animation{
     }
 
 
-
     @Override
     public void doOneFrame(DrawSurface d) {
         this.shouldStop = false;
@@ -39,11 +37,10 @@ public class CountdownAnimation implements Animation{
         this.gameScreen.drawAllOn(d);
         this.environment.drawAllOn(d);
         d.setColor(Color.BLACK);
-        if (countFrom > 0){
+        if (countFrom > 0) {
             d.drawText(GameLevel.WIDTH / 2, GameLevel.HEIGHT / 2, Integer.toString(countFrom), fontSize);
             this.countFrom--;
-        }
-        else if (countFrom == 0){
+        } else if (countFrom == 0) {
             d.drawText(GameLevel.WIDTH / 2, GameLevel.HEIGHT / 2, "GO!", fontSize);
             this.shouldStop = true;
         }

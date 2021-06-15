@@ -1,16 +1,14 @@
 package animation;
 
-import biuoop.GUI;
 import biuoop.DrawSurface;
+import biuoop.GUI;
 import biuoop.Sleeper;
-
-import java.awt.*;
 
 public class AnimationRunner {
     private final GUI gui;
     private final Sleeper sleeper;
 
-    public AnimationRunner(GUI gui){
+    public AnimationRunner(GUI gui) {
         this.gui = gui;
         this.sleeper = new Sleeper();
     }

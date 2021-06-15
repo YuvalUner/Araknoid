@@ -9,7 +9,7 @@ import game.eventlisteners.LifeAdder;
 import gamegeometry.basetypes.Block;
 import objectbehavior.Counter;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Yuval Uner
@@ -64,9 +64,15 @@ public class BlockBuilder {
     public static BallAddingBlock standardBallAddingBlock(double x, double y, double width,
                                                           double height, BlockRemover blockRemover,
                                                           BallAdder ballAdder,
-                                                          Counter remainingBlocks){
+                                                          Counter remainingBlocks) {
         return new BallAddingBlock(new RemovableBlock(new BlockWithText(new Block(x,
                 y, width, height, Color.magenta), "Extra Ball", Color.black, 11, x,
                 y + height / 1.5), blockRemover, false, remainingBlocks), ballAdder);
+    }
+
+    public static KillBlock standardNonRemovableKillBlock(double x, double y, double width,
+                                                          double height, BallRemover ballRemover) {
+        return new KillBlock(new BlockWithText(new Block(x, y, width, height, Color.black),
+                "Kill Block", Color.white, 11, x, y + height / 1.5), ballRemover);
     }
 }

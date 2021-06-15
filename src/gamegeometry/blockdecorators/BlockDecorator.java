@@ -3,8 +3,8 @@
 package gamegeometry.blockdecorators;
 
 import game.eventlisteners.HitListener;
-import gamegeometry.basetypes.GameObject;
 import gamegeometry.basetypes.Block;
+import gamegeometry.basetypes.GameObject;
 import gamegeometry.basicgeometry.Rectangle;
 
 import java.util.List;

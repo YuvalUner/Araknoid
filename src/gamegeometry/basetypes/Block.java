@@ -3,16 +3,16 @@
 package gamegeometry.basetypes;
 
 import biuoop.DrawSurface;
-import game.levels.LevelInformation;
-import gamegeometry.blockdecorators.BlockDecorator;
-import objectbehavior.Velocity;
-import gamegeometry.basicgeometry.Rectangle;
-import gamegeometry.basicgeometry.Line;
-import gamegeometry.basicgeometry.Point;
 import game.eventlisteners.HitListener;
 import game.eventlisteners.HitNotifier;
+import game.levels.LevelInformation;
+import gamegeometry.basicgeometry.Line;
+import gamegeometry.basicgeometry.Point;
+import gamegeometry.basicgeometry.Rectangle;
+import gamegeometry.blockdecorators.BlockDecorator;
+import objectbehavior.Velocity;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**

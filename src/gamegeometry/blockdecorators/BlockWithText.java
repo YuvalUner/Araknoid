@@ -4,7 +4,7 @@ package gamegeometry.blockdecorators;
 
 import biuoop.DrawSurface;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Yuval Uner

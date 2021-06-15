@@ -8,14 +8,16 @@ import biuoop.KeyboardSensor;
 import game.eventlisteners.BallRemover;
 import game.gameessentials.LifeIndicator;
 import game.gameessentials.ScoreIndicator;
-import gamegeometry.basetypes.*;
+import gamegeometry.basetypes.Ball;
+import gamegeometry.basetypes.Block;
+import gamegeometry.basetypes.Paddle;
 import gamegeometry.basicgeometry.Point;
 import gamegeometry.basicgeometry.Rectangle;
 import gamegeometry.blockdecorators.BlockWithText;
 import gamegeometry.blockdecorators.KillBlock;
 import objectbehavior.Counter;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Yuval Uner
@@ -64,7 +66,7 @@ public class GameLevel implements Animation {
      */
     public void initialize() {
         KillBlock downKillBlock = new KillBlock(new Block(0, GameLevel.HEIGHT
-                , GameLevel.WIDTH, 1 , Color.black), new BallRemover(level,
+                , GameLevel.WIDTH, 1, Color.black), new BallRemover(level,
                 level.getRemainingBalls()));
         downKillBlock.addToLevel(level);
         ScoreIndicator scoreIndicator = new ScoreIndicator(new Block(0, 0,
@@ -74,25 +76,25 @@ public class GameLevel implements Animation {
                 GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
         scoreIndicator.addToLevel(level);
         BlockWithText levelIndicator = new BlockWithText(new Block(WIDTH / 3, 0,
-                        WIDTH / 3 + 20, GameLevel.SCORE_INDICATOR_HEIGHT, Color.white),
+                WIDTH / 3 + 20, GameLevel.SCORE_INDICATOR_HEIGHT, Color.white),
                 "Current Level: " + level.levelName(), Color.black, 14,
                 WIDTH / 3 + 30, GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
         levelIndicator.addToLevel(level);
         LifeIndicator lifeIndicator = new LifeIndicator(new Block(2 * WIDTH / 3, 0,
-                        WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT,
-                        Color.white), "", Color.black, this.lifeCounter, 14 ,
-                        GameLevel.WIDTH - 130, GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
+                WIDTH / 3, GameLevel.SCORE_INDICATOR_HEIGHT,
+                Color.white), "", Color.black, this.lifeCounter, 14,
+                GameLevel.WIDTH - 130, GameLevel.SCORE_INDICATOR_HEIGHT / 1.3);
         lifeIndicator.addToLevel(level);
         Rectangle rectangle = new Rectangle(new Point(WIDTH / 2 - level.paddleWidth() / 2,
-                        550), level.paddleWidth(), 15);
+                550), level.paddleWidth(), 15);
         this.paddle = new Paddle(keyboard, rectangle, Color.ORANGE, level);
         this.paddle.addToLevel(level);
         initializeBalls();
     }
 
-    private void initializeBalls(){
-        for (int i = 0; i < level.numberOfBalls(); i ++) {
-            Ball ball = new Ball(WIDTH / 2, 500, Ball.DEFAULT_RADIUS, Color.white);
+    private void initializeBalls() {
+        for (int i = 0; i < level.numberOfBalls(); i++) {
+            Ball ball = new Ball(WIDTH / 2, 530, Ball.DEFAULT_RADIUS, Color.white);
             ball.setEnvironment(level.getEnvironment());
             ball.setVelocity(level.initialBallVelocities().get(i));
             ball.addToLevel(level);
@@ -113,8 +115,9 @@ public class GameLevel implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        if (this.keyboard.isPressed("p")){
-            this.runner.run(new PauseScreen(this.keyboard));
+        if (this.keyboard.isPressed("p")) {
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, new String[]{KeyboardSensor.SPACE_KEY},
+                    new PauseScreen()));
         }
         level.getBackground().drawOn(d);
         level.getEnvironment().drawAllOn(d);
@@ -125,20 +128,20 @@ public class GameLevel implements Animation {
             this.scoreTracker.increase(100);
             this.running = false;
         }
-        if (this.lifeCounter.getCurrentCount() == 0){
+        if (this.lifeCounter.getCurrentCount() == 0) {
             this.running = false;
         }
-        if (keyboard.isPressed("m")){
+        if (keyboard.isPressed("m")) {
             this.scoreTracker.increase(100);
             this.running = false;
-        }
-        else if (level.getRemainingBalls().getCurrentCount() == 0){
+        } else if (level.getRemainingBalls().getCurrentCount() == 0) {
+            paddle.setPosition(WIDTH / 2 - level.paddleWidth() / 2);
             initializeBalls();
             this.lifeCounter.decrease(1);
-            paddle.setPosition(WIDTH / 2 - level.paddleWidth() / 2);
             if (this.lifeCounter.getCurrentCount() > 0) {
-                this.runner.run(new WaitingScreenAnimation(60, level.getSprites(),
-                        level.getEnvironment(), 30, this.keyboard, level.getBackground()));
+                this.runner.run(new KeyPressStoppableAnimation(this.keyboard, new String[]{KeyboardSensor.RIGHT_KEY,
+                        KeyboardSensor.LEFT_KEY, "a", "d"}, new WaitingScreenAnimation(level.getSprites(),
+                        level.getEnvironment(), 30, level.getBackground())));
             }
         }
     }

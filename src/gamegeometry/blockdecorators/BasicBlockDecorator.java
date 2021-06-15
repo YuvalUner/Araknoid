@@ -10,9 +10,9 @@ import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.Collidable;
 import gamegeometry.basetypes.Sprite;
-import objectbehavior.Velocity;
 import gamegeometry.basicgeometry.Point;
 import gamegeometry.basicgeometry.Rectangle;
+import objectbehavior.Velocity;
 
 import java.util.List;
 

@@ -5,8 +5,8 @@ import game.gameessentials.Background;
 import game.gameessentials.GameEnvironment;
 import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
-import gamegeometry.blockdecorators.*;
 import gamegeometry.basicgeometry.Rectangle;
+import gamegeometry.blockdecorators.*;
 import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.List;
 
 
-public class LevelMoon extends BaseLevel{
+public class LevelMoon extends BaseLevel {
 
     private final Background background;
 
@@ -30,14 +30,14 @@ public class LevelMoon extends BaseLevel{
         velocities.add(Velocity.fromAngleAndSpeed(225, Ball.DEFAULT_SPEED));
     }
 
-    private void initializeBackground(){
+    private void initializeBackground() {
         Block backgroundBlock = new Block(0, 0, GameLevel.WIDTH,
                 GameLevel.HEIGHT, Color.green);
         this.background.addToBackground(backgroundBlock);
     }
 
     private void initializeBlocks(ScoreTrackingListener scoreTracker,
-                                  Counter lifeCounter){
+                                  Counter lifeCounter) {
         BlockRemover blockRemover = new BlockRemover(this, getRemainingBlocks());
         BallRemover ballRemover = new BallRemover(this, getRemainingBalls());
         BallAdder ballAdder = new BallAdder(this, getRemainingBalls());
@@ -91,8 +91,7 @@ public class LevelMoon extends BaseLevel{
                                     blockWidth, blockHeight, Color.yellow), scoreTracker,
                             Block.DEFAULT_SCORE), blockRemover, true, getRemainingBlocks());
                     blockThirdRow.addToLevel(this);
-                }
-                else{
+                } else {
                     BallAddingBlock ballAddingBlock = BlockBuilder.standardBallAddingBlock(
                             i + margin * 2, initialY + blockHeight * 2, blockWidth,
                             blockHeight, blockRemover, ballAdder, getRemainingBlocks());

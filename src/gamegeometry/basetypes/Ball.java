@@ -2,18 +2,16 @@
 
 package gamegeometry.basetypes;
 
-import game.levels.GameLevel;
-import game.levels.LevelInformation;
-import gamegeometry.basicgeometry.Point;
-import gamegeometry.basicgeometry.Line;
-import gamegeometry.basicgeometry.Rectangle;
 import biuoop.DrawSurface;
 import game.gameessentials.GameEnvironment;
+import game.levels.LevelInformation;
+import gamegeometry.basicgeometry.Line;
+import gamegeometry.basicgeometry.Point;
+import gamegeometry.basicgeometry.Rectangle;
 import objectbehavior.CollisionInfo;
 import objectbehavior.Velocity;
 
-
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Yuval Uner
@@ -49,8 +47,8 @@ public class Ball implements Sprite {
     private GameEnvironment environment;
     private Line trajectory;
     private CollisionInfo closestCollision;
-    public static final int DEFAULT_SPEED = 8;
-    public static final int DEFAULT_RADIUS = 10;
+    public static final int DEFAULT_SPEED = 7;
+    public static final int DEFAULT_RADIUS = 12;
 
     /**
      * Constructor.
@@ -201,6 +199,8 @@ public class Ball implements Sprite {
     public void drawOn(DrawSurface d) {
         d.setColor(color);
         d.fillCircle((int) center.getX(), (int) center.getY(), r);
+        d.setColor(Color.black);
+        d.drawCircle((int) center.getX(), (int) center.getY(), r);
     }
 
     /**

@@ -7,7 +7,7 @@ import gamegeometry.blockdecorators.BlockDecorator;
 import gamegeometry.blockdecorators.BlockWithText;
 import objectbehavior.Counter;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Yuval Uner

@@ -2,7 +2,6 @@
 
 package gamegeometry.blockdecorators;
 
-import game.eventlisteners.BallAdder;
 import game.eventlisteners.LifeAdder;
 
 /**

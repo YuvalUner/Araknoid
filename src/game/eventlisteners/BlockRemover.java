@@ -3,9 +3,9 @@
 package game.eventlisteners;
 
 import game.levels.LevelInformation;
+import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
 import objectbehavior.Counter;
-import gamegeometry.basetypes.Ball;
 
 import java.util.ArrayList;
 
@@ -22,7 +22,7 @@ public class BlockRemover implements HitListener {
     /**
      * Constructor.
      *
-     * @param level          the level the blocks belong to, nessecary for block removal
+     * @param level         the level the blocks belong to, nessecary for block removal
      * @param removedBlocks the counter keeping track of how many blocks are
      *                      still in the game
      */

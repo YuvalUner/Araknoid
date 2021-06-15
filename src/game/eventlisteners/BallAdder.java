@@ -3,12 +3,12 @@
 package game.eventlisteners;
 
 import game.levels.LevelInformation;
+import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
 import objectbehavior.Counter;
-import gamegeometry.basetypes.Ball;
 import objectbehavior.Velocity;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
  * @author Yuval Uner
@@ -22,7 +22,7 @@ public class BallAdder implements HitListener {
     /**
      * Constructor.
      *
-     * @param level           the level the listener corresponds to.
+     * @param level        the level the listener corresponds to.
      * @param currentBalls the level's remainingBalls counter.
      */
     public BallAdder(LevelInformation level, Counter currentBalls) {

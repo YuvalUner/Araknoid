@@ -4,13 +4,13 @@ package game.gameessentials;
 
 import biuoop.DrawSurface;
 import game.levels.GameLevel;
-import gamegeometry.basetypes.Collidable;
 import gamegeometry.basetypes.Block;
-import objectbehavior.CollisionInfo;
-import gamegeometry.basicgeometry.Point;
+import gamegeometry.basetypes.Collidable;
 import gamegeometry.basicgeometry.Line;
+import gamegeometry.basicgeometry.Point;
+import objectbehavior.CollisionInfo;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 
 /**

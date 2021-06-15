@@ -1,6 +1,7 @@
 package game.levels;
 
-import game.gameessentials.*;
+import game.gameessentials.GameEnvironment;
+import game.gameessentials.SpriteCollection;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.Collidable;
 import gamegeometry.basetypes.Sprite;
@@ -10,7 +11,7 @@ import objectbehavior.Velocity;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseLevel implements  LevelInformation {
+public abstract class BaseLevel implements LevelInformation {
 
     private final GameEnvironment environment;
     private final SpriteCollection spriteCollection;
@@ -25,7 +26,7 @@ public abstract class BaseLevel implements  LevelInformation {
     private final ArrayList<Velocity> initialBallVelocities;
 
     public BaseLevel(GameEnvironment environment, int numberOfBalls,
-                     int paddleWidth, String levelName, int paddleSpeed){
+                     int paddleWidth, String levelName, int paddleSpeed) {
         this.environment = environment;
         this.spriteCollection = new SpriteCollection();
         this.numberOfBalls = numberOfBalls;
@@ -50,7 +51,7 @@ public abstract class BaseLevel implements  LevelInformation {
         return this.numberOfBalls;
     }
 
-    public void increaseNumberOfBlocksToRemove(int amount){
+    public void increaseNumberOfBlocksToRemove(int amount) {
         this.numberOfBlocksToRemove += amount;
     }
 
@@ -65,22 +66,22 @@ public abstract class BaseLevel implements  LevelInformation {
     }
 
     @Override
-    public SpriteCollection getSprites(){
+    public SpriteCollection getSprites() {
         return this.spriteCollection;
     }
 
     @Override
-    public GameEnvironment getEnvironment(){
+    public GameEnvironment getEnvironment() {
         return this.environment;
     }
 
     @Override
-    public void addSprite(Sprite s){
+    public void addSprite(Sprite s) {
         this.spriteCollection.addSprite(s);
     }
 
     @Override
-    public void removeSprite(Sprite s){
+    public void removeSprite(Sprite s) {
         this.spriteCollection.remove(s);
     }
 
