@@ -5,26 +5,18 @@ package gamegeometry.basetypes;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import game.levels.LevelInformation;
-import gamegeometry.basicgeometry.Point;
-import gamegeometry.basicgeometry.Rectangle;
+import basicgeometry.Point;
+import basicgeometry.Rectangle;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
  * @author Yuval Uner
  * <h1> A rectangular paddle for a player to move</h1>
- * <p> Contains the following public methods:
- * 1. Constructor
- * 2. moveLeft and moveRight - move the paddle to the left or right
- * 3. timePassed - checks if a specific key press was made, and if it was,
- * calls the appropriate move method.
- * 4. drawOn - Draws the paddle on the screen
- * 5. Getter for the paddle's shape
- * 6. hit - Changes the velocity of the object which hit the paddle depending
- * on the part of the paddle that was hit
- * 7. addToGame - adds the paddle to the game</p>
+ * <p> The player's movable character. Allows the player to interact and
+ * bounce the balls around to clear the game.</p>
  */
 public class Paddle implements Sprite, Collidable {
 
@@ -33,23 +25,25 @@ public class Paddle implements Sprite, Collidable {
     private final Color color;
     private final ArrayList<Rectangle> regions;
     private final LevelInformation level;
-    static final int PADDLE_SPEED = 8;
+    private final int paddleSpeed;
 
     /**
      * Constructor.
      *
-     * @param keyboard the keyBoard sensor for the paddle
-     * @param shape    the shape of the paddle
-     * @param color    the paddle's color
-     * @param level    the game the paddle is a part of
+     * @param keyboard    the keyBoard sensor for the paddle
+     * @param shape       the shape of the paddle
+     * @param color       the paddle's color
+     * @param level       the game the paddle is a part of
+     * @param paddleSpeed the speed of the paddle.
      */
     public Paddle(KeyboardSensor keyboard, Rectangle shape, Color color,
-                  LevelInformation level) {
+                  LevelInformation level, int paddleSpeed) {
         this.keyboard = keyboard;
         this.shape = shape;
         this.color = color;
         this.regions = new ArrayList<>();
         this.level = level;
+        this.paddleSpeed = paddleSpeed;
         setRegions();
     }
 
@@ -70,6 +64,11 @@ public class Paddle implements Sprite, Collidable {
         }
     }
 
+    /**
+     * Changes the x value of the paddle's current location.
+     *
+     * @param x the x value to change the current location to.
+     */
     public void setPosition(double x) {
         this.shape = new Rectangle(x, shape.getUpperLeft().getY(), shape.getWidth(), shape.getHeight());
     }
@@ -84,7 +83,7 @@ public class Paddle implements Sprite, Collidable {
                     shape.getUpperLeft().getY(), shape.getWidth(), shape.getHeight());
             // Otherwise, the paddle can proceed freely at its established speed
         } else {
-            this.shape = new Rectangle(shape.getUpperLeft().getX() - PADDLE_SPEED,
+            this.shape = new Rectangle(shape.getUpperLeft().getX() - this.paddleSpeed,
                     shape.getUpperLeft().getY(), shape.getWidth(), shape.getHeight());
         }
         // Re-setting the regions after movement
@@ -104,7 +103,7 @@ public class Paddle implements Sprite, Collidable {
                     shape.getUpperLeft().getY(), shape.getWidth(), shape.getHeight());
             // Otherwise, freely moves the paddle to the right at the set speed
         } else {
-            this.shape = new Rectangle(shape.getUpperLeft().getX() + PADDLE_SPEED,
+            this.shape = new Rectangle(shape.getUpperLeft().getX() + this.paddleSpeed,
                     shape.getUpperLeft().getY(), shape.getWidth(), shape.getHeight());
         }
         // Re-setting the regions after the paddle moved
@@ -175,12 +174,12 @@ public class Paddle implements Sprite, Collidable {
     }
 
     @Override
-    public void addToLevel(LevelInformation level) {
-        level.addCollidable(this);
-        level.addSprite(this);
+    public void addToLevel(LevelInformation levelInformation) {
+        levelInformation.addCollidable(this);
+        levelInformation.addSprite(this);
     }
 
     @Override
-    public void removeFromLevel(LevelInformation level) {
+    public void removeFromLevel(LevelInformation levelInformation) {
     }
 }

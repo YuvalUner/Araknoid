@@ -9,7 +9,7 @@ import game.eventlisteners.LifeAdder;
 import gamegeometry.basetypes.Block;
 import objectbehavior.Counter;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Yuval Uner
@@ -61,6 +61,17 @@ public class BlockBuilder {
                 blockRemover, false, remainingBlocks), ballRemover);
     }
 
+    /**
+     * @param x               the block's initial x value.
+     * @param y               the block's initial y value.
+     * @param height          the block's height.
+     * @param width           the block's width.
+     * @param ballAdder       the listener for the adding of balls to the game.
+     * @param blockRemover    the listener for removing the block upon hit.
+     * @param remainingBlocks the game's remainingBlocks counter.
+     * @return returns a new removable uncounted ball adding block with standard magenta
+     * color and standard "Extra Ball" text to it.
+     */
     public static BallAddingBlock standardBallAddingBlock(double x, double y, double width,
                                                           double height, BlockRemover blockRemover,
                                                           BallAdder ballAdder,
@@ -70,6 +81,15 @@ public class BlockBuilder {
                 y + height / 1.5), blockRemover, false, remainingBlocks), ballAdder);
     }
 
+    /**
+     * @param x           the block's initial x value.
+     * @param y           the block's initial y value.
+     * @param height      the block's height.
+     * @param width       the block's width.
+     * @param ballRemover the listener for the removal of balls to the game.
+     * @return returns a new non removable uncounted kill block with standard black
+     * color and standard "Kill Block" text to it.
+     */
     public static KillBlock standardNonRemovableKillBlock(double x, double y, double width,
                                                           double height, BallRemover ballRemover) {
         return new KillBlock(new BlockWithText(new Block(x, y, width, height, Color.black),

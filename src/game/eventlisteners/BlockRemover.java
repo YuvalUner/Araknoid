@@ -34,6 +34,11 @@ public class BlockRemover implements HitListener {
 
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
+        /*
+        * Only decorated blocks should have this hit listener.
+        * Therefore, error checking is skipped here, as in case of a programmer
+        * error, a null pointer exception will be thrown.
+        * */
         beingHit.getDecorator().removeFromLevel(level);
         /*
          * Some special blocks may not need to be hit to win the game, and they

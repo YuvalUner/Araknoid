@@ -6,26 +6,23 @@ import biuoop.DrawSurface;
 import game.levels.GameLevel;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.Collidable;
-import gamegeometry.basicgeometry.Line;
-import gamegeometry.basicgeometry.Point;
+import basicgeometry.Line;
+import basicgeometry.Point;
 import objectbehavior.CollisionInfo;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
  * @author Yuval Uner
  * <h1> A class for a game enviornment that contains collidable objects within it</h1>
- * <p>Contains the following public methods:
- * 1. addCollidable - adds a collidable object to the game enviornment
- * 2. getClosestCollision - finds the closest collision to an object, by the
- * trajectory of the object</p>
- * 3. Getters for borders and window
- * 4. drawAllOn - a method to draw all collidable objects on the screen
+ * <p> Describes the environment of the game, as well as sets some basic settings for it,
+ * such as the borders of the screen, and provides the limits for movement within
+ * the screen. </p>
  */
 public class GameEnvironment {
 
-    private ArrayList<Collidable> collidables;
+    private final ArrayList<Collidable> collidables;
     private final Block window;
     private final double borders;
 

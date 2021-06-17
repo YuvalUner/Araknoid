@@ -1,42 +1,76 @@
+// Yuval Uner 322558842
+
 package game.levels;
 
-import game.eventlisteners.*;
+import game.eventlisteners.BallAdder;
+import game.eventlisteners.BallRemover;
+import game.eventlisteners.BlockRemover;
+import game.eventlisteners.LifeAdder;
+import game.eventlisteners.ScoreTrackingListener;
 import game.gameessentials.Background;
 import game.gameessentials.GameEnvironment;
 import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
-import gamegeometry.basetypes.Sprite;
-import gamegeometry.blockdecorators.*;
+import gamegeometry.blockdecorators.BallAddingBlock;
+import gamegeometry.blockdecorators.BlockBuilder;
+import gamegeometry.blockdecorators.KillBlock;
+import gamegeometry.blockdecorators.LifeBlock;
+import gamegeometry.blockdecorators.RemovableBlock;
+import gamegeometry.blockdecorators.ScoredBlock;
 import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
-public class LevelHell extends BaseLevel {
+/**
+ * @author Yuval Uner
+ * <h1> The game's hard level</h1>
+ * <p> Features a medium sized paddle, 3 balls, lots of blocks, and 3 unremovable
+ * kill blocks.</p>
+ */
+public class LevelHard extends BaseLevel {
 
     private final Background background;
 
-    public LevelHell(GameEnvironment environment,
+    /**
+     * Constructor.
+     *
+     * @param environment  the environment for the level.
+     * @param scoreTracker the game's score tracker.
+     * @param lifeCounter  the game's life counter.
+     */
+    public LevelHard(GameEnvironment environment,
                      ScoreTrackingListener scoreTracker,
                      Counter lifeCounter) {
-        super(environment, 3, 200, "Hell", 8);
-        initializeBlocks(scoreTracker, lifeCounter);
+        super(environment, 3, 200, "Hard Mode", 8);
+        setBlocks(scoreTracker, lifeCounter);
         this.background = new Background();
-        initializeBackground();
+        setBackground();
         List<Velocity> velocities = initialBallVelocities();
-        velocities.add(Velocity.fromAngleAndSpeed(125, Ball.DEFAULT_SPEED));
-        velocities.add(Velocity.fromAngleAndSpeed(185, Ball.DEFAULT_SPEED));
-        velocities.add(Velocity.fromAngleAndSpeed(225, Ball.DEFAULT_SPEED));
+        velocities.add(Velocity.fromAngleAndSpeed(135, Ball.DEFAULT_SPEED));
+        velocities.add(Velocity.fromAngleAndSpeed(175, Ball.DEFAULT_SPEED));
+        velocities.add(Velocity.fromAngleAndSpeed(215, Ball.DEFAULT_SPEED));
     }
 
-    private void initializeBackground() {
+    /**
+     * Sets the level's background to a custom design (Which in reality, is just
+     * a plain color background. However, it is possible to design a more intricate
+     * background with the appropriate time and effort).
+     */
+    private void setBackground() {
         Block backgroundBlock = new Block(0, 0, GameLevel.WIDTH, GameLevel.HEIGHT,
                 new Color(66, 197, 245));
         this.background.addToBackground(backgroundBlock);
     }
 
-    private void initializeBlocks(ScoreTrackingListener scoreTracker, Counter lifeCounter) {
+    /**
+     * Sets the level's blocks to their appropriate positions.
+     *
+     * @param scoreTracker the game's score tracker.
+     * @param lifeCounter  the game's life counter.
+     */
+    private void setBlocks(ScoreTrackingListener scoreTracker, Counter lifeCounter) {
         double blockWidth = (GameLevel.WIDTH - getEnvironment().getBorders() * 2) / 15;
         int blockHeight = 24;
         int margin = 100;
@@ -130,7 +164,7 @@ public class LevelHell extends BaseLevel {
     }
 
     @Override
-    public Sprite getBackground() {
+    public Background getBackground() {
         return this.background;
     }
 }

@@ -1,6 +1,6 @@
 // Yuval Uner 322558842
 
-package gamegeometry.basicgeometry;
+package basicgeometry;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,19 +8,8 @@ import java.util.Random;
 /**
  * @author Yuval Uner
  * <h1> A line in a 2 dimensional space </h1>
- * <p>
- * A class that represents a line segment in a 2 dimensional space,
- * represented by a starting point and an end point.
- * Contains the following public methods:
- * 1. Constructors for both inputting start and end points as points,
- * and as 2 pairs of x and y values.
- * 2. Getters for the start and end points.
- * 3. middle - gets the middle point of the line.
- * 4. equals - checks equality with another line.
- * 5. intersectionWith - gets the intersection point of this line with
- * another line, if one exists.
- * 6. isIntersecting - checks if the line intersects with another given line.
- * </p>
+ * <p> A general line in 2d space, which can can be drawn, as well as
+ * check intersections with other lines.</p>
  */
 public class Line {
 

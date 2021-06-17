@@ -8,11 +8,13 @@ import gamegeometry.basetypes.Block;
 import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Yuval Uner
  * <h1> A listener for adding balls to the game upon hit</h1>
+ * <p> Any blocks with this listener will add a ball to the game, heading downwards
+ * from the position of the block.</p>
  */
 public class BallAdder implements HitListener {
 
@@ -32,7 +34,7 @@ public class BallAdder implements HitListener {
 
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
-        // Heading a ball heading downward from the location the block was at.
+        // Adding a ball heading downward from the location the block was at.
         Ball newBall = new Ball((int) (beingHit.getCollisionRectangle().getUpperLeft().getX()
                 + beingHit.getCollisionRectangle().getWidth() / 2),
                 (int) (beingHit.getCollisionRectangle().getUpperLeft().getY()

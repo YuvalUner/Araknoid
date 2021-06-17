@@ -3,7 +3,7 @@
 package objectbehavior;
 
 import gamegeometry.basetypes.Collidable;
-import gamegeometry.basicgeometry.Point;
+import basicgeometry.Point;
 
 /**
  * @author Yuval Uner

@@ -7,7 +7,7 @@ import gamegeometry.blockdecorators.BlockDecorator;
 import gamegeometry.blockdecorators.BlockWithText;
 import objectbehavior.Counter;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Yuval Uner
@@ -26,6 +26,8 @@ public class ScoreIndicator extends BlockWithText {
      * @param textColor    the color of the text.
      * @param fontSize     the font size of the text.
      * @param scoreCounter the game's score counter.
+     * @param x            the x position of the text.
+     * @param y            the y position of the text.
      */
     public ScoreIndicator(BlockDecorator block, String text, Color textColor,
                           Counter scoreCounter, int fontSize, double x, double y) {

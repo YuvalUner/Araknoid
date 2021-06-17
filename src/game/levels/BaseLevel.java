@@ -1,3 +1,5 @@
+// Yuval Uner 322558842
+
 package game.levels;
 
 import game.gameessentials.GameEnvironment;
@@ -11,6 +13,11 @@ import objectbehavior.Velocity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Yuval Uner
+ * <h1> The basic functionality for all levels</h1>
+ * <p> Handles most of the the many getters of LevelInformation in a universal manner.</p>
+ */
 public abstract class BaseLevel implements LevelInformation {
 
     private final GameEnvironment environment;
@@ -25,6 +32,17 @@ public abstract class BaseLevel implements LevelInformation {
     private final Counter remainingBalls;
     private final ArrayList<Velocity> initialBallVelocities;
 
+    /**
+     * Constructor.
+     * Initializes all the fields needed for full functionality, as well as
+     * sets most of the level specific fields.
+     *
+     * @param environment   the environment for the game level to use.
+     * @param numberOfBalls the amount of balls to spawn during the level.
+     * @param paddleWidth   the width of the paddle during the current level.
+     * @param levelName     the name of the level.
+     * @param paddleSpeed   the speed of the paddle.
+     */
     public BaseLevel(GameEnvironment environment, int numberOfBalls,
                      int paddleWidth, String levelName, int paddleSpeed) {
         this.environment = environment;
@@ -38,10 +56,12 @@ public abstract class BaseLevel implements LevelInformation {
         this.remainingBlocks = new Counter();
     }
 
+    @Override
     public Counter getRemainingBlocks() {
         return this.remainingBlocks;
     }
 
+    @Override
     public Counter getRemainingBalls() {
         return this.remainingBalls;
     }
@@ -51,6 +71,11 @@ public abstract class BaseLevel implements LevelInformation {
         return this.numberOfBalls;
     }
 
+    /**
+     * Increases the value of blocks that need to be removed to win the game.
+     *
+     * @param amount the amount to increase by.
+     */
     public void increaseNumberOfBlocksToRemove(int amount) {
         this.numberOfBlocksToRemove += amount;
     }

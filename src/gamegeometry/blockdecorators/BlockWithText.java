@@ -4,7 +4,7 @@ package gamegeometry.blockdecorators;
 
 import biuoop.DrawSurface;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Yuval Uner
@@ -25,6 +25,8 @@ public class BlockWithText extends BasicBlockDecorator {
      * @param text      the text assigned to the block.
      * @param textColor the color of the text.
      * @param fontSize  the size of the font.
+     * @param x         the x position of the text.
+     * @param y         the y position of the text.
      */
     public BlockWithText(BlockDecorator block, String text, Color textColor, int fontSize,
                          double x, double y) {

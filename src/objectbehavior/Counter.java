@@ -5,11 +5,8 @@ package objectbehavior;
 /**
  * @author Yuval Uner
  * <h1> A basic counter</h1>
- * <p> Contains the following public methods:
- * 1. Constructor
- * 2. Increase the counter's value by n
- * 3. Decrease the counter's value by n
- * 4. Get the counter's current value.</p>
+ * <p> A counter which can be increased or decreased, as well as can get
+ * the current count on it.</p>
  */
 public class Counter {
 

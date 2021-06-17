@@ -1,43 +1,75 @@
 package game.levels;
 
-import game.eventlisteners.*;
+import game.eventlisteners.BallAdder;
+import game.eventlisteners.BallRemover;
+import game.eventlisteners.BlockRemover;
+import game.eventlisteners.LifeAdder;
+import game.eventlisteners.ScoreTrackingListener;
 import game.gameessentials.Background;
 import game.gameessentials.GameEnvironment;
 import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
-import gamegeometry.basicgeometry.Rectangle;
-import gamegeometry.blockdecorators.*;
+import basicgeometry.Rectangle;
+import gamegeometry.blockdecorators.BallAddingBlock;
+import gamegeometry.blockdecorators.BlockBuilder;
+import gamegeometry.blockdecorators.KillBlock;
+import gamegeometry.blockdecorators.LifeBlock;
+import gamegeometry.blockdecorators.RemovableBlock;
+import gamegeometry.blockdecorators.ScoredBlock;
 import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
-
-public class LevelMoon extends BaseLevel {
+/**
+ * @author Yuval Uner
+ * <h1> The game's normal level</h1>
+ * <p> Features a small paddle, 2 balls, a moderate amount of balls, and
+ * some special removable blocks.</p>
+ */
+public class LevelNormal extends BaseLevel {
 
     private final Background background;
 
-    public LevelMoon(GameEnvironment environment,
-                     ScoreTrackingListener scoreTracker,
-                     Counter lifeCounter) {
-        super(environment, 2, 120, "Moon", 8);
-        initializeBlocks(scoreTracker, lifeCounter);
+    /**
+     * Constructor.
+     *
+     * @param environment  the environment for the level.
+     * @param scoreTracker the game's score tracker.
+     * @param lifeCounter  the game's life counter.
+     */
+    public LevelNormal(GameEnvironment environment,
+                       ScoreTrackingListener scoreTracker,
+                       Counter lifeCounter) {
+        super(environment, 2, 150, "Normal Mode", 8);
+        setBlocks(scoreTracker, lifeCounter);
         this.background = new Background();
-        initializeBackground();
+        setBackground();
         List<Velocity> velocities = initialBallVelocities();
-        velocities.add(Velocity.fromAngleAndSpeed(135, Ball.DEFAULT_SPEED));
-        velocities.add(Velocity.fromAngleAndSpeed(225, Ball.DEFAULT_SPEED));
+        velocities.add(Velocity.fromAngleAndSpeed(145, Ball.DEFAULT_SPEED));
+        velocities.add(Velocity.fromAngleAndSpeed(200, Ball.DEFAULT_SPEED));
     }
 
-    private void initializeBackground() {
+    /**
+     * Sets the level's background to a custom design (Which in reality, is just
+     * a plain color background. However, it is possible to design a more intricate
+     * background with the appropriate time and effort).
+     */
+    private void setBackground() {
         Block backgroundBlock = new Block(0, 0, GameLevel.WIDTH,
                 GameLevel.HEIGHT, Color.green);
         this.background.addToBackground(backgroundBlock);
     }
 
-    private void initializeBlocks(ScoreTrackingListener scoreTracker,
-                                  Counter lifeCounter) {
+    /**
+     * Sets the level's blocks to their appropriate positions.
+     *
+     * @param scoreTracker the game's score tracker.
+     * @param lifeCounter  the game's life counter.
+     */
+    private void setBlocks(ScoreTrackingListener scoreTracker,
+                           Counter lifeCounter) {
         BlockRemover blockRemover = new BlockRemover(this, getRemainingBlocks());
         BallRemover ballRemover = new BallRemover(this, getRemainingBalls());
         BallAdder ballAdder = new BallAdder(this, getRemainingBalls());

@@ -6,26 +6,22 @@ import biuoop.DrawSurface;
 import game.eventlisteners.HitListener;
 import game.eventlisteners.HitNotifier;
 import game.levels.LevelInformation;
-import gamegeometry.basicgeometry.Line;
-import gamegeometry.basicgeometry.Point;
-import gamegeometry.basicgeometry.Rectangle;
+import basicgeometry.Line;
+import basicgeometry.Point;
+import basicgeometry.Rectangle;
 import gamegeometry.blockdecorators.BlockDecorator;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
  * @author Yuval Uner
  * <h1> A collidable block in 2d space </h1>
- * <p> Contains the following public methods:
- * 1. Constructor
- * 2. Getters for shape and color
- * 3. hit - a method for detecting on which side of the block a collision
- * occured, and change the velocity of the object which hit it accordingly
- * 4. addToGame - adds the block to a game
- * 5. drawOn - draws the block on a DrawSurface
- * 6. timePassed - currently does nothing</p>
+ * <p> The Block class can act as either a static object in the game, or it can
+ * act as a collidable, as well as have many possible attributes possible via
+ * the various decorators made for the class. Most blocks are wrapped
+ * with RemovableBlock.</p>
  */
 public class Block implements Collidable, Sprite, HitNotifier, BlockDecorator {
 
@@ -61,10 +57,18 @@ public class Block implements Collidable, Sprite, HitNotifier, BlockDecorator {
         this(new Rectangle(x, y, width, height), color);
     }
 
+    /**
+     * Sets the decorator field.
+     *
+     * @param newDecorator the decorator to set the field as.
+     */
     public void setDecorator(BlockDecorator newDecorator) {
         this.decorator = newDecorator;
     }
 
+    /**
+     * @return the block's decorator.
+     */
     public BlockDecorator getDecorator() {
         return decorator;
     }

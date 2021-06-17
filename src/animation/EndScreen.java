@@ -1,15 +1,31 @@
+// Yuval Uner 322558842
+
 package animation;
 
 import biuoop.DrawSurface;
 import game.levels.GameLevel;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * @author Yuval Uner
+ * <h1> An end screen animation for the game</h1>
+ * <p> Displays at the end of the game, showing whether the player won or lost,
+ * as well as their final score. This class should always be wrapped by
+ * keyPressStoppableAnimation.</p>
+ */
 public class EndScreen implements Animation {
 
     private final int score;
     private final String text;
 
+    /**
+     * Constructor.
+     *
+     * @param text  the text to display at the end of the game. Should usually be
+     *              "Game Over" or "You Won!".
+     * @param score the player's end score.
+     */
     public EndScreen(String text, int score) {
         this.text = text;
         this.score = score;

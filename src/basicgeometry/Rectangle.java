@@ -1,6 +1,6 @@
 // Yuval Uner 322558842
 
-package gamegeometry.basicgeometry;
+package basicgeometry;
 
 import java.util.ArrayList;
 
@@ -8,12 +8,8 @@ import java.util.ArrayList;
  * @author Yuval Uner
  * <h1> A rectangle in 2d space </h1>
  * <p> A class representing an instance of a rectangle in 2 dimensional
- * space. It contains the following public methods:
- * 1. Constructors
- * 2. Getters for its upper left points, the width and the height
- * 3. A method for finding all intersection points of a line with the rectangle
- * 4. Methods to return each of the lines that define the rectangle as
- * a Line object.
+ * space. Can check for intersections with it, and is used as the basis for
+ * rectangular objects with added functionality.
  * </p>
  */
 public class Rectangle {

@@ -2,23 +2,12 @@
 
 package objectbehavior;
 
-import gamegeometry.basicgeometry.Point;
+import basicgeometry.Point;
 
 /**
  * @author Yuval Uner
  * <h1> Describes an object's change rate in the x and y axis </h1>
- * <p>
- * A class describing the change rate of an object in a 2d space.
- * It is defined by dx - the change rate in the x axis, and dy, the
- * change rate in the y axis.
- * Contains the following public methods:
- * 1. Constructor.
- * 2. Getters for dx and dy.
- * 3. fromAngleAndSpeed - a method to generate a new velocity object
- * from angle and speed, instead of directly from dx and dy values.
- * 4. applyToPoint - creates a new point, using the center of a given point
- * and adding to it the dx and dy values.
- * </p>
+ * <p> A standard velocity vector, used for the movement of an object on a 2d space.</p>
  */
 public class Velocity {
 

@@ -1,3 +1,5 @@
+// Yuval Uner 322558842
+
 package game.levels;
 
 import game.eventlisteners.BlockRemover;
@@ -7,7 +9,6 @@ import game.gameessentials.Background;
 import game.gameessentials.GameEnvironment;
 import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
-import gamegeometry.basetypes.Sprite;
 import gamegeometry.blockdecorators.BlockBuilder;
 import gamegeometry.blockdecorators.LifeBlock;
 import gamegeometry.blockdecorators.RemovableBlock;
@@ -15,20 +16,32 @@ import gamegeometry.blockdecorators.ScoredBlock;
 import objectbehavior.Counter;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.List;
 
-public class LevelWideEasy extends BaseLevel {
+/**
+ * @author Yuval Uner
+ * <h1> The game's easy level</h1>
+ * <p> Features few blocks, a very wide paddle, and many balls.</p>
+ */
+public class LevelEasy extends BaseLevel {
 
     private final Background background;
 
-    public LevelWideEasy(GameEnvironment environment,
-                         ScoreTrackingListener scoreTracker,
-                         Counter lifeCounter) {
-        super(environment, 8, GameLevel.WIDTH - 200, "Wide Easy", 2);
-        initializeBlocks(scoreTracker, lifeCounter);
+    /**
+     * Constructor.
+     *
+     * @param environment  the environment for the level.
+     * @param scoreTracker the game's score tracker.
+     * @param lifeCounter  the game's life counter.
+     */
+    public LevelEasy(GameEnvironment environment,
+                     ScoreTrackingListener scoreTracker,
+                     Counter lifeCounter) {
+        super(environment, 8, GameLevel.WIDTH - 200, "Easy Mode", 2);
+        setBlocks(scoreTracker, lifeCounter);
         this.background = new Background();
-        initializeBackground();
+        setBackground();
         List<Velocity> velocities = initialBallVelocities();
         velocities.add(Velocity.fromAngleAndSpeed(105, Ball.DEFAULT_SPEED));
         velocities.add(Velocity.fromAngleAndSpeed(125, Ball.DEFAULT_SPEED));
@@ -40,12 +53,23 @@ public class LevelWideEasy extends BaseLevel {
         velocities.add(Velocity.fromAngleAndSpeed(245, Ball.DEFAULT_SPEED));
     }
 
-    private void initializeBackground() {
+    /**
+     * Sets the level's background to a custom design (Which in reality, is just
+     * a plain color background. However, it is possible to design a more intricate
+     * background with the appropriate time and effort).
+     */
+    private void setBackground() {
         Block backgroundBlock = new Block(0, 0, GameLevel.WIDTH, GameLevel.HEIGHT, Color.MAGENTA);
         this.background.addToBackground(backgroundBlock);
     }
 
-    private void initializeBlocks(ScoreTrackingListener scoreTracker, Counter lifeCounter) {
+    /**
+     * Sets the level's blocks to their appropriate positions.
+     *
+     * @param scoreTracker the game's score tracker.
+     * @param lifeCounter  the game's life counter.
+     */
+    private void setBlocks(ScoreTrackingListener scoreTracker, Counter lifeCounter) {
         double blockWidth = (GameLevel.WIDTH - getEnvironment().getBorders() * 2) / 15;
         int blockHeight = 24;
         Color color;
@@ -82,7 +106,7 @@ public class LevelWideEasy extends BaseLevel {
     }
 
     @Override
-    public Sprite getBackground() {
+    public Background getBackground() {
         return background;
     }
 }

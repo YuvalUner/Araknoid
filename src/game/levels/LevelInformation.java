@@ -1,5 +1,8 @@
+// Yuval Uner 322558842
+
 package game.levels;
 
+import game.gameessentials.Background;
 import game.gameessentials.GameEnvironment;
 import game.gameessentials.SpriteCollection;
 import gamegeometry.basetypes.Block;
@@ -10,45 +13,99 @@ import objectbehavior.Velocity;
 
 import java.util.List;
 
+/**
+ * @author Yuval Uner
+ * <h1> An interface describing the base behavior of all classes which store
+ * information about the different levels of the game.</h1>
+ */
 public interface LevelInformation {
+
+    /**
+     * @return the amount of balls that the level should have initially.
+     */
     int numberOfBalls();
 
-    // The initial velocity of each ball
-    // Note that initialBallVelocities().size() == numberOfBalls()
+    /**
+     * @return a list containing the initial velocities of each ball.
+     */
     List<Velocity> initialBallVelocities();
 
+    /**
+     * @return the speed value of the paddle for the specific level.
+     */
     int paddleSpeed();
 
+    /**
+     * @return the width value of the paddle for the specific level.
+     */
     int paddleWidth();
 
-    // the level name will be displayed at the top of the screen.
+    /**
+     * @return the level's name.
+     */
     String levelName();
 
-    // Returns a sprite with the background of the level
-    Sprite getBackground();
+    /**
+     * @return the level's background object.
+     */
+    Background getBackground();
 
-    // The Blocks that make up this level, each block contains
-    // its size, color and location.
+    /**
+     * @return the list of blocks the level uses.
+     */
     List<Block> blocks();
 
-    // Number of blocks that should be removed
-    // before the level is considered to be "cleared".
-    // This number should be <= blocks.size();
+    /**
+     * @return the amount of blocks that need to be removed to win the level.
+     */
     int numberOfBlocksToRemove();
 
+    /**
+     * @return the level's environment.
+     */
     GameEnvironment getEnvironment();
 
+    /**
+     * Adds a sprite to the level.
+     *
+     * @param s the sprite to add.
+     */
     void addSprite(Sprite s);
 
+    /**
+     * Removes a sprite from the level.
+     *
+     * @param s the sprite to remove.
+     */
     void removeSprite(Sprite s);
 
+    /**
+     * @return the level's sprite collection.
+     */
     SpriteCollection getSprites();
 
+    /**
+     * Adds a collidable to the level.
+     *
+     * @param c the collidable to add.
+     */
     void addCollidable(Collidable c);
 
+    /**
+     * Removes a collidable from the level.
+     *
+     * @param c the collidable to remove.
+     */
     void removeCollidable(Collidable c);
 
+    /**
+     * @return the counter for the balls currently on screen.
+     */
     Counter getRemainingBalls();
 
+    /**
+     * @return the counter for how many blocks still remain in the level.
+     */
     Counter getRemainingBlocks();
+
 }

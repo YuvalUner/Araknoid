@@ -2,10 +2,10 @@
 
 package gamegeometry.blockdecorators;
 
+import basicgeometry.Rectangle;
 import game.eventlisteners.HitListener;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.GameObject;
-import gamegeometry.basicgeometry.Rectangle;
 
 import java.util.List;
 
@@ -28,11 +28,25 @@ public interface BlockDecorator extends GameObject {
      */
     boolean isCounted();
 
+    /**
+     * @return the block decorator's hit listeners.
+     */
     List<HitListener> getHitListeners();
 
+    /**
+     * Removes a hit listener from the block decorator's list of hit listeners.
+     *
+     * @param hitListener the hit listener to remove.
+     */
     void removeHitListener(HitListener hitListener);
 
+    /**
+     * @return the block decorator's collision rectangle.
+     */
     Rectangle getCollisionRectangle();
 
+    /**
+     * @return the score value of the block decorator.
+     */
     int getScoreValue();
 }

@@ -10,11 +10,8 @@ import java.util.ArrayList;
 /**
  * @author Yuval Uner
  * <h1> A collection of sprites</h1>
- * <p> Contains the following public methods:
- * 1. Constructor (only initalizes the spriteList ArrayList)
- * 2. addSprite - a method to add sprites to spriteList
- * 3. notifyAllTimePassed - uses the timePassed method on all sprites
- * 4. drawAllOn - draws all sprites on a DrawSurface</p>
+ * <p> The collection in which all the sprites for the game are stored.</p>
+ * Contains all the functionality needed for a fully functional game.
  */
 public class SpriteCollection {
 

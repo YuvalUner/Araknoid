@@ -1,19 +1,13 @@
 // Yuval Uner 322558842
 
-package gamegeometry.basicgeometry;
+package basicgeometry;
 
 /**
  * @author Yuval Uner
  * <h1> A point in a 2 dimensional space </h1>
  * <p>
- * A class that represents a single point in a 2 dimensional space,
- * designated by an X and Y axis.
- * Its fields are the x coordinate and the y coordinate.
- * Contains the following public methods:
- * 1. Constructor to set the x and y values.
- * 2. Getters for x and y.
- * 3. distance - gets the difference from a different point.
- * 4. equals - checks equality with a different point.
+ * The most basic aspect for geometry. Can check equality and distance from other
+ * points.
  * </p>
  */
 public class Point {

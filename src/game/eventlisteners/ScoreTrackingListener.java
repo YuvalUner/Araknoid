@@ -25,6 +25,9 @@ public class ScoreTrackingListener implements HitListener {
         this.scoreCounter = scoreCounter;
     }
 
+    /**
+     * @return returns the counter the listener uses.
+     */
     public Counter getScoreCounter() {
         return scoreCounter;
     }

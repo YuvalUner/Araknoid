@@ -2,6 +2,8 @@
 
 package gamegeometry.blockdecorators;
 
+import basicgeometry.Point;
+import basicgeometry.Rectangle;
 import biuoop.DrawSurface;
 import game.eventlisteners.HitListener;
 import game.eventlisteners.HitNotifier;
@@ -10,8 +12,6 @@ import gamegeometry.basetypes.Ball;
 import gamegeometry.basetypes.Block;
 import gamegeometry.basetypes.Collidable;
 import gamegeometry.basetypes.Sprite;
-import gamegeometry.basicgeometry.Point;
-import gamegeometry.basicgeometry.Rectangle;
 import objectbehavior.Velocity;
 
 import java.util.List;

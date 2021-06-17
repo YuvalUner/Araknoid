@@ -5,38 +5,20 @@ package gamegeometry.basetypes;
 import biuoop.DrawSurface;
 import game.gameessentials.GameEnvironment;
 import game.levels.LevelInformation;
-import gamegeometry.basicgeometry.Line;
-import gamegeometry.basicgeometry.Point;
-import gamegeometry.basicgeometry.Rectangle;
+import basicgeometry.Line;
+import basicgeometry.Point;
+import basicgeometry.Rectangle;
 import objectbehavior.CollisionInfo;
 import objectbehavior.Velocity;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author Yuval Uner
  * <h1> A ball with a center and radius in 2d space </h1>
- * <p>
- * A class describing a ball in a 2d space, represented as a starting
- * point and a radius, as well as the ball's color.
- * In addition, also stores the starting point of the ball, the velocity
- * of the ball, and the frame the ball is restricted to (the 2d grid).
- * Contains the following public methods:
- * 1. Constructors
- * 2. Getters for the radius, the center point's x and y values,
- * the ball's color and it's velocity.
- * 3. setEnvironmentFrame - a method to define an Environment frame for the ball
- * , the borders of the screen it is on, via either an already created frame
- * object or 4 int values. If none is defined via this method, the ball will
- * have a default frame, of a square from (0,0) to (200,200).
- * 4. setVelocity - a method to set the velocity of the ball, via either
- * an already created velocity object or 2 double values.
- * 5. timePassed - a method for moving the center of the ball one step, according
- * to the velocity of the ball. Will move until the nearest collision point.
- * 6. drawOn - draws the ball on a drawsurface, according to it's center,
- * color and radius.
- * 7. addToGame - adds the ball to a game.
- * </p>
+ * <p>The ball can be either a static object in the game, or move around.
+ * When moving, it needs to have its environment and velocity initialized,
+ * and will detect when it collides with the game's collidable objects.</p>
  */
 public class Ball implements Sprite {
 
