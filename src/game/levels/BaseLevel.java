@@ -56,6 +56,7 @@ public abstract class BaseLevel implements LevelInformation {
         this.remainingBlocks = new Counter();
     }
 
+
     @Override
     public Counter getRemainingBlocks() {
         return this.remainingBlocks;

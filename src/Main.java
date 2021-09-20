@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * the next level. This was made for testing, and kept for ease of testing.
  * Feature should be removed if not in testing.</p>
  */
-public class Ass6Game {
+public class Main {
 
     /**
      * A main method.
