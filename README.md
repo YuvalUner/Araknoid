@@ -1,1 +1,4 @@
-The 6th assignment of the BIU 2021 spring semester Intro to OOP Course, where the main project of the course was finished.
+# Araknoid
+A re-creation of the classic Araknoid game, created as the project of the 2021 Introduction to OOP course of Bar-Ilan university\
+\
+![Araknoid](resources\sample.gif)
